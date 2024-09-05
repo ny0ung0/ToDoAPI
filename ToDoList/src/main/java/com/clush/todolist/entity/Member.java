@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,22 +13,20 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ToDo extends BaseEntity {
-
+public class Member extends BaseEntity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long userId;
 	
-	@Column(length = 50, nullable = false)
-	private String title;
+	@Column(length = 30, nullable = false)
+	private String username;
 	
-	private String description;
+	@Column(length = 20, nullable = false)
+	private String password;
 	
-	private boolean completed;
+	@Column(length = 10, nullable = false)
+	private String name;
 	
-	/*
-	 * @ManyToOne
-	 * @JoinColumn(name = "userid", nullable = false) 
-	 * private Member userId;
-	 */
+
 }
