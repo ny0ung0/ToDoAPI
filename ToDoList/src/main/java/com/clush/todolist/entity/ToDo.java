@@ -1,12 +1,14 @@
 package com.clush.todolist.entity;
 
+import com.clush.todolist.dto.Importance;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,7 +28,11 @@ public class ToDo extends BaseEntity {
 	
 	private String description;
 	
-	private boolean completed;
+	private Boolean completed;
+	
+	@Column(length = 6)
+	@Enumerated(EnumType.STRING)
+	private Importance importance;
 	
 	/*
 	 * @ManyToOne
