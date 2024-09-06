@@ -17,7 +17,9 @@ public class ToDoDto {
 
 	private String description;
 
-	private boolean completed;
+	private Boolean completed;
+	
+	private Importance importance;
 
 	private LocalDateTime createdAt;
 
