@@ -6,8 +6,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @MappedSuperclass
+@Getter
+@Setter
 public class BaseEntity {
 	
 	@Column(name = "created_at", nullable = false, updatable = false)

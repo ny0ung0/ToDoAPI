@@ -15,4 +15,9 @@ public interface ToDoRepository extends JpaRepository<ToDo, Long> {
 	List<ToDo> findByImportance(Importance importance);
 
 	List<ToDo> findByDueDateBetween(LocalDate now, LocalDate oneDayLater);
+
+	long countByCompleted(boolean completed);
+
+	List<ToDo> findByDueDate(LocalDate date);
+	
 }
