@@ -1,6 +1,7 @@
 package com.clush.todolist.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.clush.todolist.dto.Importance;
 
@@ -43,4 +44,6 @@ public class ToDo extends BaseEntity {
 	 * @JoinColumn(name = "userid", nullable = false) 
 	 * private Member userId;
 	 */
+
+
 }
