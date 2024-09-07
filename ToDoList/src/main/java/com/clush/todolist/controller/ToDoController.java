@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.clush.todolist.dto.Importance;
 import com.clush.todolist.entity.ToDo;
 import com.clush.todolist.service.ToDoService;
 
@@ -72,5 +73,43 @@ public class ToDoController {
 		return todoService.getPendingWork();
 	}
 	
+	//중요도 별 할일 리스트 출력
+	@GetMapping("/work/importance/{importance}")
+	public List<ToDo> getWorkByPriority(@PathVariable("importance") Importance importance) {
+	    return todoService.getWorkByImportance(importance);
+	}
 	
+	//기한이 하루남은 할일 리스트 출력
+	@GetMapping("/work/upcoming")
+	public List<ToDo> getUpcomingWork() {
+	    return todoService.getUpcomingDeadlines();
+	}
+	
+	// high -> medium -> low -> null 순으로 정렬된 작업 목록 반환
+    @GetMapping("/work/desc")
+    public ResponseEntity<List<ToDo>> getWorkListByImportanceDesc() {
+        List<ToDo> sortedList = todoService.getWorkListByImportanceDesc();
+        return ResponseEntity.ok(sortedList);
+    }
+
+    // low -> medium -> high -> null 순으로 정렬된 작업 목록 반환
+    @GetMapping("/work/asc")
+    public ResponseEntity<List<ToDo>> getWorkListByImportanceAsc() {
+        List<ToDo> sortedList = todoService.getWorkListByImportanceAsc();
+        return ResponseEntity.ok(sortedList);
+    }
+	
+ // 오늘 포함 미래 날짜 작업 출력(오름차순)
+    @GetMapping("/work/future")
+    public ResponseEntity<List<ToDo>> getFutureAndTodayDueDateTasks() {
+        List<ToDo> futureTasks = todoService.getFutureAndTodayDueDateTasks();
+        return ResponseEntity.ok(futureTasks);
+    }
+
+    // 오늘 이전 날짜 작업 출력(내림차순)
+    @GetMapping("/work/past")
+    public ResponseEntity<List<ToDo>> getPastDueDateTasks() {
+        List<ToDo> pastTasks = todoService.getPastDueDateTasks();
+        return ResponseEntity.ok(pastTasks);
+    }
 }

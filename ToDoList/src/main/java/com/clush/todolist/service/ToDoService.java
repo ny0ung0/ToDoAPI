@@ -1,8 +1,11 @@
 package com.clush.todolist.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,4 +74,44 @@ public class ToDoService {
 	public List<ToDo> getWorkByImportance(Importance importance) {
 		return todoRepository.findByImportance(importance);
 	}
+	
+	public List<ToDo> getUpcomingDeadlines() {
+		LocalDate now = LocalDate.now();
+		LocalDate oneDayLater = now.plusDays(1);
+		return todoRepository.findByDueDateBetween(now, oneDayLater);
+	}
+	
+	public List<ToDo> getWorkListByImportanceDesc() {
+        List<ToDo> data = todoRepository.findAll();
+        
+        data.sort(Comparator.comparing(ToDo::getImportance, 
+                   Comparator.nullsLast(Comparator.reverseOrder())));
+
+        return data;
+    }
+
+    public List<ToDo> getWorkListByImportanceAsc() {
+        List<ToDo> data = todoRepository.findAll();
+        
+        data.sort(Comparator.comparing(ToDo::getImportance, 
+                   Comparator.nullsLast(Comparator.naturalOrder())));
+
+        return data;
+    }
+    
+    public List<ToDo> getFutureAndTodayDueDateTasks() {
+        LocalDate today = LocalDate.now();
+        return todoRepository.findAll().stream()
+            .filter(todo -> todo.getDueDate() != null && !todo.getDueDate().isBefore(today))  // 오늘 포함 이후 날짜
+            .sorted((t1, t2) -> t1.getDueDate().compareTo(t2.getDueDate()))  // 오름차순 정렬
+            .collect(Collectors.toList());
+    }
+
+    public List<ToDo> getPastDueDateTasks() {
+        LocalDate today = LocalDate.now();
+        return todoRepository.findAll().stream()
+            .filter(todo -> todo.getDueDate() != null && todo.getDueDate().isBefore(today))  // 오늘 이전 날짜
+            .sorted((t1, t2) -> t2.getDueDate().compareTo(t1.getDueDate()))  // 오름차순 정렬
+            .collect(Collectors.toList());
+    }
 }

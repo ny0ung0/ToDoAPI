@@ -1,5 +1,7 @@
 package com.clush.todolist.entity;
 
+import java.time.LocalDate;
+
 import com.clush.todolist.dto.Importance;
 
 import jakarta.persistence.Column;
@@ -34,6 +36,8 @@ public class ToDo extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private Importance importance;
 	
+	@Column(name = "duedate")
+	private LocalDate dueDate;
 	/*
 	 * @ManyToOne
 	 * @JoinColumn(name = "userid", nullable = false) 

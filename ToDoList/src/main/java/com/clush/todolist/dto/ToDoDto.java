@@ -1,5 +1,6 @@
 package com.clush.todolist.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.Getter;
@@ -24,4 +25,6 @@ public class ToDoDto {
 	private LocalDateTime createdAt;
 
 	private LocalDateTime updatedAt;
+	
+	private LocalDate dueDate;
 }
