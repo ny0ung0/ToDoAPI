@@ -66,3 +66,17 @@
 ## 4. API 명세
 build 실행 후 클릭해주세요.
 <a href="http://localhost:8080/clush-backend.html">Swagger UI로 확인하기기</a>
+
+## 5. DB스키마
+```sql
+CREATE TABLE `to_do` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  `completed` bit(1) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `duedate` date NOT NULL,
+  `importance` enum('high','low','medium') DEFAULT NULL,
+  `title` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+);
