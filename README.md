@@ -58,4 +58,5 @@
 - **JPQL**: 객체 지향적인 쿼리 언어인 JPQL을 사용하여 DB 쿼리를 작성합니다.
 - **트랜잭션 관리**: DB 트랜잭션을 자동으로 관리하여 데이터의 일관성과 무결성을 보장합니다.
 
-<h3>4. API 명세</h3>
+##4. API 명세
+<a href="http://localhost:8080/clush-backend.html">Swagger UI로 확인하기기</a>
