@@ -29,6 +29,8 @@
 1. Gradle 프로젝트 홈 디렉토리에서 `./gradlew build` 명령어를 실행하여 프로젝트를 빌드합니다.
 2. `java -jar build/libs/ToDoList-1.0.0-SNAPSHOT.jar` 또는 `./gradlew bootRun` 명령어를 통해서 빌드 프로젝트를 실행합니다.
 
+## 3. 주력으로 사용한 컴포넌트 설명 및 사용 이유
+
 ### Spring Boot
 
 - **간편한 API 개발**: `@RestController`와 `@Service` 어노테이션을 통해 어플리케이션 구조를 간단하게 설정할 수 있습니다.
