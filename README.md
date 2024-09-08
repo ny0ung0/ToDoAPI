@@ -18,7 +18,7 @@
 
 ### 2.2. 데이터베이스 설정
 1. MySQL에서 `clush_todo`라는 이름의 데이터베이스를 생성합니다.
-2. `src/main/resources/application.properties` 파일을 열어 데이터베이스 연결 정보를 설정합니다
+2. `src/main/resources/application.properties` 파일을 열어 아래 예시와 같이 본인 MySQL 데이터베이스 연결 정보를 설정합니다
     ```properties
     spring.datasource.url=jdbc:mysql://localhost:3306/clush_todo
     spring.datasource.username=root
