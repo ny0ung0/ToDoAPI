@@ -20,4 +20,5 @@ public interface ToDoRepository extends JpaRepository<ToDo, Long> {
 
 	List<ToDo> findByDueDate(LocalDate date);
 	
+	List<ToDo> findByDueDateGreaterThanEqualOrderByDueDate(LocalDate date);
 }
