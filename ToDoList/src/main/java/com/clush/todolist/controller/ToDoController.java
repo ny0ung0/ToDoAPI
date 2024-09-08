@@ -23,8 +23,14 @@ import com.clush.todolist.exception.NoContentException;
 import com.clush.todolist.exception.NotFoundException;
 import com.clush.todolist.service.ToDoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api")
+@Tag(name = "ToDo Controller", description = "할 일 crud, 정렬, 통계 API")
 public class ToDoController {
 
 	@Autowired
@@ -32,6 +38,7 @@ public class ToDoController {
 
 	// 새로운 할 일을 추가하는 엔드포인트
 	@PostMapping("/work")
+	@Operation(summary = "새로운 할 일 추가", description = "body에는 title은 필수로 직접 입력해야 합니다. dueDate는 입력하지 않는 경우 자동으로 당일 날짜로 등록됩니다.")
 	public ResponseEntity<String> addWork(@RequestBody ToDo todo) {
 
 		todoService.addWork(todo);
@@ -41,17 +48,19 @@ public class ToDoController {
 
 	// 모든 할 일 목록을 반환
 	@GetMapping("/work")
+	@Operation(summary = "모든 할 일 목록 반환")
 	public ResponseEntity<?> getWorkList() {
-	    try {
-	        List<ToDo> data = todoService.getWorkList();
-	        return ResponseEntity.ok(data);
-	    } catch (NoContentException e) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-	    }
+		try {
+			List<ToDo> data = todoService.getWorkList();
+			return ResponseEntity.ok(data);
+		} catch (NoContentException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
 	}
 
 	// 특정 ID의 할 일을 수정
 	@PutMapping("/work/{id}")
+	@Operation(summary = "특정 ID의 할 일을 수정", description = "completed를 true로 변경해보세요.")
 	public ResponseEntity<?> editWork(@PathVariable("id") Long id, @RequestBody ToDo todo) {
 		try {
 			ToDo updatedToDo = todoService.editWork(id, todo);
@@ -63,6 +72,7 @@ public class ToDoController {
 
 	// 특정 ID의 할 일을 삭제
 	@DeleteMapping("/work/{id}")
+	@Operation(summary = "특정 ID의 할 일을 삭제")
 	public ResponseEntity<String> deleteWork(@PathVariable("id") Long id) {
 		try {
 			todoService.deleteWork(id);
@@ -74,6 +84,7 @@ public class ToDoController {
 
 	// 완료된 할 일 목록을 반환
 	@GetMapping("/work/completed")
+	@Operation(summary = "완료된 할 일 목록을 반환")
 	public ResponseEntity<List<ToDo>> getCompletedWork() {
 
 		return ResponseEntity.ok(todoService.getCompleteWork());
@@ -81,6 +92,7 @@ public class ToDoController {
 
 	// 미완료된 할 일 목록을 반환
 	@GetMapping("/work/pending")
+	@Operation(summary = "미완료된 할 일 목록을 반환")
 	public ResponseEntity<List<ToDo>> getPendingWork() {
 
 		return ResponseEntity.ok(todoService.getPendingWork());
@@ -88,6 +100,7 @@ public class ToDoController {
 
 	// 중요도 별 할 일 목록을 반환
 	@GetMapping("/work/importance/{importance}")
+	@Operation(summary = "중요도 별 할 일 목록을 반환")
 	public ResponseEntity<List<ToDo>> getWorkByPriority(@PathVariable("importance") Importance importance) {
 
 		return ResponseEntity.ok(todoService.getWorkByImportance(importance));
@@ -95,6 +108,7 @@ public class ToDoController {
 
 	// 기한이 하루 남은 할 일 목록을 반환
 	@GetMapping("/work/upcoming")
+	@Operation(summary = "기한이 하루 남은 할 일 목록을 반환")
 	public ResponseEntity<List<ToDo>> getUpcomingWork() {
 
 		return ResponseEntity.ok(todoService.getUpcomingDeadlines());
@@ -103,6 +117,7 @@ public class ToDoController {
 	// 중요도 내림차순으로 정렬된 할 일 목록을 반환
 	// high -> medium -> low -> null 순으로 정렬된 작업 목록 반환
 	@GetMapping("/work/desc")
+	@Operation(summary = "중요도 내림차순으로 정렬된 할 일 목록을 반환", description = "high -> medium -> low -> null 순으로 정렬된 작업 목록 반환")
 	public ResponseEntity<List<ToDo>> getWorkListByImportanceDesc() {
 
 		return ResponseEntity.ok(todoService.getWorkListByImportanceDesc());
@@ -111,6 +126,7 @@ public class ToDoController {
 	// 중요도 오름차순으로 정렬된 할 일 목록을 반환
 	// low -> medium -> high -> null 순으로 정렬된 작업 목록 반환
 	@GetMapping("/work/asc")
+	@Operation(summary = "중요도 오름차순으로 정렬된 할 일 목록을 반환", description = "low -> medium -> high -> null 순으로 정렬된 작업 목록 반환")
 	public ResponseEntity<List<ToDo>> getWorkListByImportanceAsc() {
 
 		return ResponseEntity.ok(todoService.getWorkListByImportanceAsc());
@@ -118,12 +134,14 @@ public class ToDoController {
 
 	// 오늘과 미래 날짜의 기한을 가진 할 일 목록을 반환(오름차순)
 	@GetMapping("/work/future")
+	@Operation(summary = "오늘과 미래 날짜의 기한을 가진 할 일 목록을 반환(오름차순)")
 	public ResponseEntity<List<ToDo>> getFutureAndTodayDueDateTasks() {
 		return ResponseEntity.ok(todoService.getFutureAndTodayDueDateTasks());
 	}
 
 	// 오늘 이전 날짜의 기한을 가진 할 일 목록을 반환(내림차순)
 	@GetMapping("/work/past")
+	@Operation(summary = "오늘 이전 날짜의 기한을 가진 할 일 목록을 반환(내림차순)")
 	public ResponseEntity<List<ToDo>> getPastDueDateTasks() {
 
 		return ResponseEntity.ok(todoService.getPastDueDateWork());
@@ -131,14 +149,17 @@ public class ToDoController {
 
 	// 전체 할 일 중 완료된 할 일의 비율을 반환
 	@GetMapping("/work/statistics")
-	public ResponseEntity<Double> getCompletionPercentage() {
+	@Operation(summary = "전체 할 일 중 완료된 할 일의 비율을 반환")
+	public ResponseEntity<?> getCompletionPercentage() {
 
 		double completionPercentage = todoService.calculateCompletionPercentage();
-		return ResponseEntity.ok(completionPercentage);
+		return ResponseEntity.ok(completionPercentage + "%");
 	}
 
 	// 특정 날짜의 완료 비율을 반환
 	@GetMapping("/work/statistics/completion-percentage/date")
+	@Operation(summary = "특정 날짜의 완료 비율을 반환")
+	@Parameter(name = "date", description = "dueDate", example = "2024-09-09")
 	public ResponseEntity<?> getCompletionPercentageByDate(
 			@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 
@@ -146,8 +167,11 @@ public class ToDoController {
 		return ResponseEntity.ok(completionPercentage + "%");
 	}
 
-	// 날짜 범위 내 완료 비율을 반환
+	// 특정 날짜 범위 내 완료 비율을 반환
 	@GetMapping("/work/statistics/completion-percentage/range")
+	@Operation(summary = "특정 날짜 범위 내 완료 비율을 반환")
+	@Parameters({ @Parameter(name = "startDate", description = "통계 범위 시작날짜 dueDate", example = "2024-09-04"),
+			@Parameter(name = "endDate", description = "통계 범위 마지막날짜 dueDate", example = "2024-09-22") })
 	public ResponseEntity<?> getCompletionPercentageByDateRange(
 			@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
@@ -164,6 +188,8 @@ public class ToDoController {
 
 	// 주간 완료 비율을 반환
 	@GetMapping("/work/statistics/weekly")
+	@Operation(summary = "주간 완료 비율을 반환")
+	@Parameter(name = "startDate", description = "주간 통계 시작날짜 dueDate", example = "2024-09-09")
 	public ResponseEntity<?> getWeeklyStatistics(
 			@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate) {
 
@@ -173,8 +199,11 @@ public class ToDoController {
 
 	// 월간 완료 비율을 반환
 	@GetMapping("/work/statistics/monthly")
+	@Operation(summary = "월간 완료 비율을 반환")
+	@Parameter(name = "startDate", description = "주간 통계 시작날짜 dueDate", example = "2024-09-01")
 	public ResponseEntity<?> getMonthlyStatistics(
 			@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate) {
+
 		double completionRate = todoService.getMonthlyCompletionRate(startDate);
 		return ResponseEntity.ok("Completion Rate for the month: " + completionRate + "%");
 	}
