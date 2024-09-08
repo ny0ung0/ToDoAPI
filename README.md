@@ -59,4 +59,5 @@
 - **트랜잭션 관리**: DB 트랜잭션을 자동으로 관리하여 데이터의 일관성과 무결성을 보장합니다.
 
 ## 4. API 명세
+build 실행 후 클릭해주세요.
 <a href="http://localhost:8080/clush-backend.html">Swagger UI로 확인하기기</a>
