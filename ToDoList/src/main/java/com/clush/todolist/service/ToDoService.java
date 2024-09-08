@@ -21,10 +21,15 @@ public class ToDoService {
 	@Autowired
 	private ToDoRepository todoRepository;
 
+	
 	// 새로운 할 일 추가
 	public void addWork(ToDo todo) {
 		todo.setCompleted(false);
-
+		
+		if (todo.getDueDate() == null) {
+	        todo.setDueDate(LocalDate.now());
+	    }
+		
 		todoRepository.save(todo);
 	}
 
