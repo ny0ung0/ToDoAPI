@@ -80,3 +80,5 @@ CREATE TABLE `to_do` (
   `title` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 );
+
+해당 API는 JPA를 사용하여 구현하였으므로 별도로 MySQL에 테이블 생성 쿼리문을 작성할 필요는 없습니다.
