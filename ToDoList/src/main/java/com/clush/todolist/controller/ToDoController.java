@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.clush.todolist.dto.Importance;
 import com.clush.todolist.entity.ToDo;
@@ -26,6 +26,9 @@ import com.clush.todolist.service.ToDoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -38,7 +41,7 @@ public class ToDoController {
 
 	// 새로운 할 일을 추가하는 엔드포인트
 	@PostMapping("/work")
-	@Operation(summary = "새로운 할 일 추가", description = "body에는 title은 필수로 직접 입력해야 합니다. dueDate는 입력하지 않는 경우 자동으로 당일 날짜로 등록됩니다.")
+	@Operation(summary = "새로운 할 일 추가", description = "title은 필수로 입력해야 합니다. dueDate는 입력하지 않는 경우 오늘 날짜로 저장됩니다.", requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/json", schema = @Schema(implementation = ToDo.class), examples = @ExampleObject(value = "{ \"title\": \"할 일 제목\", \"description\": \"할 일 설명\", \"importance\": \"medium\"}"))))
 	public ResponseEntity<String> addWork(@RequestBody ToDo todo) {
 
 		todoService.addWork(todo);
@@ -60,7 +63,7 @@ public class ToDoController {
 
 	// 특정 ID의 할 일을 수정
 	@PutMapping("/work/{id}")
-	@Operation(summary = "특정 ID의 할 일을 수정", description = "completed를 true로 변경해보세요.")
+	@Operation(summary = "특정 ID의 할 일을 수정", description = "할 일의 id를 지정하고 completed를 true로 변경해보세요.", requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/json", schema = @Schema(implementation = ToDo.class), examples = @ExampleObject(value = "{ \"title\": \"clush 지원하기\", \"description\": \"사람인으로 clush 공고 지원\", \"importance\": \"high\", \"completed\": \"true\"}"))))
 	public ResponseEntity<?> editWork(@PathVariable("id") Long id, @RequestBody ToDo todo) {
 		try {
 			ToDo updatedToDo = todoService.editWork(id, todo);
