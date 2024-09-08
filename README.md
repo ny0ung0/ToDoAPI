@@ -9,21 +9,26 @@
 - 기한이 다가오는 작업 확인
 - 완료 비율 계산 통계 기능
 
-<h3>2. 소스 빌드 및 실행 방법</h3>
-<h4>2.1. 필수 소프트웨어</h4>
-<li>Java 17 이상</li>
-<li>Gradle 7.0이상</li>
-<li>MySQL</li>
-<h4>2.2. 데이터베이스 설정</h4>
-1. MySQL에서 <strong>clush_todo</strong>라는 이름의 데이터베이스를 생성합니다.<br>
-2. src/main/resources/application.properties 파일을 열어 데이터베이스 연결 정보를 설정합니다.<br>
-2-1 ex) spring.datasource.url=jdbc:mysql://localhost:3306/clush_todo<br>
-        spring.datasource.username=root<br>
-        spring.datasource.password=korea123<br>
+## 2. 소스 빌드 및 실행 방법
 
-<h4>2.3 Gradle 빌드 및 실행</h4>
-1. Gradle 프로젝트 홈 디렉토리에서 <strong>./gradlew build</strong> 명령어를 실행하여 프로젝트를 빌드해줍니다.<br>
-2. <strong>java -jar build/libs/ToDoList-0.0.1-SNAPSHOT.jar</strong> 명령어를 실행하여 JAR파일을 실행 합니다.<br>
+### 2.1. 필수 소프트웨어
+- **Java 17 이상**
+- **Gradle 7.0 이상**
+- **MySQL**
+
+### 2.2. 데이터베이스 설정
+1. MySQL에서 `clush_todo`라는 이름의 데이터베이스를 생성합니다.
+2. `src/main/resources/application.properties` 파일을 열어 데이터베이스 연결 정보를 설정합니다:
+    ```properties
+    spring.datasource.url=jdbc:mysql://localhost:3306/clush_todo
+    spring.datasource.username=root
+    spring.datasource.password=korea123
+    ```
+
+### 2.3. Gradle 빌드 및 실행
+1. Gradle 프로젝트 홈 디렉토리에서 `./gradlew build` 명령어를 실행하여 프로젝트를 빌드합니다.
+2. `java -jar build/libs/ToDoList-0.0.1-SNAPSHOT.jar` 명령어를 실행하여 JAR 파일을 실행합니다.
+
 
 <h3>3. 주력으로 사용한 컴포넌트</h3>
 <h4>1. Spring Boot</h4>
