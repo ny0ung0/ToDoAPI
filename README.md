@@ -12,15 +12,15 @@
 <li>Gradle 7.0이상</li>
 <li>MySQL</li>
 <h4>2.2. 데이터베이스 설정</h4>
-1. MySQL에서 <strong>clush_todo</strong>라는 이름의 데이터베이스를 생성합니다.
-2. src/main/resources/application.properties 파일을 열어 데이터베이스 연결 정보를 설정합니다.
+1. MySQL에서 <strong>clush_todo</strong>라는 이름의 데이터베이스를 생성합니다.<br>
+2. src/main/resources/application.properties 파일을 열어 데이터베이스 연결 정보를 설정합니다.<br>
 2-1 ex) spring.datasource.url=jdbc:mysql://localhost:3306/clush_todo
         spring.datasource.username=root
         spring.datasource.password=korea123
 
 <h4>2.3 Gradle 빌드 및 실행</h4>
-1. Gradle 프로젝트 홈 디렉토리에서 <strong>./gradlew build</strong> 명령어를 실행하여 프로젝트를 빌드해줍니다.
-2. <strong>java -jar build/libs/ToDoList-0.0.1-SNAPSHOT.jar</strong> 명령어를 실행하여 JAR파일을 실행 합니다.
+1. Gradle 프로젝트 홈 디렉토리에서 <strong>./gradlew build</strong> 명령어를 실행하여 프로젝트를 빌드해줍니다.<br>
+2. <strong>java -jar build/libs/ToDoList-0.0.1-SNAPSHOT.jar</strong> 명령어를 실행하여 JAR파일을 실행 합니다.<br>
 
 <h3>주력으로 사용한 컴포넌트</h3>
 <li></li>
