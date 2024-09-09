@@ -26,7 +26,7 @@
     ```
 
 ### 2.3. Gradle 빌드 및 실행
-1. Gradle 프로젝트 홈 디렉토리에서 `./gradlew build` 명령어를 실행하여 프로젝트를 빌드합니다.
+1. 프로젝트 홈 디렉토리에서 `./gradlew build` 명령어를 실행하여 프로젝트를 빌드합니다.
 2. `java -jar build/libs/ToDoList-1.0.0-SNAPSHOT.jar` 또는 `./gradlew bootRun` 명령어를 통해서 빌드 프로젝트를 실행합니다.
 
 ## 3. 주력으로 사용한 컴포넌트 설명 및 사용 이유
